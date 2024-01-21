@@ -1,8 +1,11 @@
 import { Link, useRouter } from "expo-router";
 import { Button, ScrollView, Text } from "react-native";
+import useHomePage from "../../hooks/useHomePage";
 
 export default function Home() {
   const router = useRouter();
+
+  const { data } = useHomePage();
   return (
     <ScrollView>
       <Button
