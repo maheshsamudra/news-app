@@ -6,6 +6,7 @@ export default function Home() {
   const router = useRouter();
 
   const { data } = useHomePage();
+
   return (
     <ScrollView>
       <Button

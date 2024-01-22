@@ -59,15 +59,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="everything"
+        name="search"
         options={{
-          title: "Everything",
+          title: "Search",
           tabBarLabelStyle: {
             fontFamily: fonts.normal,
             fontSize: fonts.toolBarFontSize,
           },
           tabBarIcon: ({ color }) => (
-            <AntDesign name="bars" size={24} color={color} />
+            <AntDesign name="search1" size={24} color={color} />
           ),
         }}
       />
