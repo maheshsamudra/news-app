@@ -8,6 +8,8 @@ const useHomePage = () => {
 
   useFocusEffect(
     useCallback(() => {
+      if (data?.length) return;
+
       setIsLoading(true);
 
       newsApi("top-headlines")

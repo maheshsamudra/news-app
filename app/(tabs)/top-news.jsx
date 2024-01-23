@@ -2,11 +2,14 @@ import { Link, useRouter } from "expo-router";
 import { ScrollView, Text, View } from "react-native";
 import useTopNews from "../../hooks/useTopNews";
 import NewsBlock from "../../components/news-block";
+import LoadingAnimation from "../../components/loading-animation";
 
 export default function TopNews() {
-  const { data } = useTopNews();
+  const { data, isLoading } = useTopNews();
 
-  console.log(data?.[3]);
+  if (isLoading && !data?.length) {
+    return <LoadingAnimation />;
+  }
 
   return (
     <ScrollView>

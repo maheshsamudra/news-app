@@ -1,6 +1,7 @@
 import React from "react";
 import { Image, Pressable, Text, View } from "react-native";
 import { useRouter } from "expo-router";
+import StyledText from "./styled-text";
 
 const NewsBlock = ({ article }) => {
   const { title, url, urlToImage, source, publishedAt, author } = article;
@@ -30,7 +31,7 @@ const NewsBlock = ({ article }) => {
         }
       >
         {urlToImage && <Image source={{ url: urlToImage }} />}
-        <Text>
+        <StyledText muted>
           {new Intl.DateTimeFormat("en", {
             timeZone: "Asia/Colombo",
             year: "numeric",
@@ -40,11 +41,11 @@ const NewsBlock = ({ article }) => {
             minute: "numeric",
           }).format(new Date(publishedAt))}
           {/*{formatInTimeZone(new Date(), "Asia/Colombo", "yyyy-MM-dd HH:mm:ss")}*/}
-        </Text>
-        <Text>
+        </StyledText>
+        <StyledText muted>
           {author || "N/A"} | {source.name}
-        </Text>
-        <Text>{title}</Text>
+        </StyledText>
+        <StyledText variant={"title"}>{title}</StyledText>
       </Pressable>
     </View>
   );
