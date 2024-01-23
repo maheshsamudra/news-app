@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import fonts from "../constants/fonts";
 
-const SearchBox = ({
+const StyledText = ({
   children,
   variant = "normal",
   muted = false,
@@ -17,7 +17,7 @@ const SearchBox = ({
   );
 };
 
-export default SearchBox;
+export default StyledText;
 
 const styles = StyleSheet.create({
   variants: {
