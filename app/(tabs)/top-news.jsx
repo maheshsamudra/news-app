@@ -10,9 +10,27 @@ export default function TopNews() {
 
   return (
     <ScrollView>
+      <View style={{ marginTop: 10 }} />
       {data?.map((article, idx) => (
         <NewsBlock article={article} key={idx} />
       ))}
     </ScrollView>
   );
 }
+
+const product = {
+  id: "id",
+  name: "name",
+  variantNames: [
+    {
+      id: "variant-id",
+      name: "name",
+      values: [
+        {
+          id: "value-id",
+          value: "value",
+        },
+      ],
+    },
+  ],
+};
