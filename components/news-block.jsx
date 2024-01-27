@@ -4,7 +4,6 @@ import { useFocusEffect, useRouter } from "expo-router";
 import StyledText from "./styled-text";
 import { Fontisto } from "@expo/vector-icons";
 import colors from "../constants/colors";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { checkIfSaved, toggleFavourite } from "../utils/saved-news";
 
 const NewsBlock = ({ article, callback = () => null }) => {
@@ -53,6 +52,13 @@ const NewsBlock = ({ article, callback = () => null }) => {
             params: {
               url,
               title,
+              article: JSON.stringify({
+                title,
+                url,
+                urlToImage,
+                source,
+                publishedAt,
+              }),
             },
           })
         }

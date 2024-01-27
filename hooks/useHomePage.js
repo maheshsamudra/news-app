@@ -11,7 +11,6 @@ const useHomePage = (refresh = "") => {
   useFocusEffect(
     useCallback(() => {
       setIsLoading(true);
-      setData([]);
       getActiveCategory().then((res) => {
         const category = res;
 

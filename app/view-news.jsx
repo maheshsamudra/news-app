@@ -1,10 +1,31 @@
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { WebView } from "react-native-webview";
 import { Stack, useLocalSearchParams } from "expo-router";
 import LoadingAnimation from "../components/loading-animation";
+import { Fontisto } from "@expo/vector-icons";
+import React, { useEffect, useState } from "react";
+import colors from "../constants/colors";
+import { checkIfSaved, toggleFavourite } from "../utils/saved-news";
 
 export default function ViewNews() {
   const params = useLocalSearchParams();
+
+  const article = params.article ? JSON.parse(params.article) : {};
+
+  const [isFavourite, setIsFavourite] = useState(false);
+
+  useEffect(() => {
+    checkIfSaved(params.url, setIsFavourite).then(() => null);
+  }, []);
+
+  const handleFavourite = async (e) => {
+    e.stopPropagation();
+
+    await toggleFavourite(article, setIsFavourite);
+
+    checkIfSaved(params.url, setIsFavourite).then(() => null);
+  };
+
   return (
     <>
       <Stack.Screen
@@ -16,6 +37,15 @@ export default function ViewNews() {
           headerTitleStyle: {
             fontWeight: "bold",
           },
+          headerRight: () => (
+            <Pressable onPress={handleFavourite} style={styles.bookmark}>
+              <Fontisto
+                name={!isFavourite ? "bookmark" : "bookmark-alt"}
+                size={24}
+                color={isFavourite ? colors.primary : "#888"}
+              />
+            </Pressable>
+          ),
         }}
       />
       <WebView
@@ -46,5 +76,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "transparent",
+  },
+  bookmark: {
+    backgroundColor: "orange",
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
 });
