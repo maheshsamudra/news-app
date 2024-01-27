@@ -1,21 +1,10 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Tabs, useRouter } from "expo-router";
-import { Pressable } from "react-native";
-import {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  AntDesign,
-} from "@expo/vector-icons";
+import { Fontisto, AntDesign } from "@expo/vector-icons";
 
 import colors from "../../constants/colors";
 import fonts from "../../constants/fonts";
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+import React from "react";
 
 export default function TabLayout() {
   const router = useRouter();
@@ -68,6 +57,19 @@ export default function TabLayout() {
           },
           tabBarIcon: ({ color }) => (
             <AntDesign name="search1" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="saved-news"
+        options={{
+          title: "Saved News",
+          tabBarLabelStyle: {
+            fontFamily: fonts.normal,
+            fontSize: fonts.toolBarFontSize,
+          },
+          tabBarIcon: ({ color }) => (
+            <Fontisto name={"bookmark-alt"} size={24} color={color} />
           ),
         }}
       />

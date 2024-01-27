@@ -20,20 +20,3 @@ export default function TopNews() {
     </ScrollView>
   );
 }
-
-const product = {
-  id: "id",
-  name: "name",
-  variantNames: [
-    {
-      id: "variant-id",
-      name: "name",
-      values: [
-        {
-          id: "value-id",
-          value: "value",
-        },
-      ],
-    },
-  ],
-};

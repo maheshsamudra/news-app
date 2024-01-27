@@ -1,5 +1,6 @@
 const colors = {
-  primary: "black",
+  primary: "#4893ff",
+  primaryFaded: "#99daff",
   text: "black",
 };
 

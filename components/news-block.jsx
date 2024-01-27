@@ -1,14 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import { useRouter } from "expo-router";
 import StyledText from "./styled-text";
+import { Fontisto } from "@expo/vector-icons";
+import colors from "../constants/colors";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { checkIfSaved, toggleFavourite } from "../utils/saved-news";
 
 const NewsBlock = ({ article }) => {
-  const { title, url, urlToImage, source, publishedAt, author } = article;
+  const { title, url, urlToImage, source, publishedAt } = article;
 
   const router = useRouter();
 
-  console.log(title, urlToImage);
+  const [isFavourite, setIsFavourite] = useState(false);
+
+  useEffect(() => {
+    checkIfSaved(url, setIsFavourite).then(() => null);
+  }, []);
+
+  const handleFavourite = async (e) => {
+    e.stopPropagation();
+
+    await toggleFavourite(article, setIsFavourite);
+  };
 
   const formattedDate = new Intl.DateTimeFormat("en", {
     timeZone: "Asia/Colombo",
@@ -35,16 +49,32 @@ const NewsBlock = ({ article }) => {
           })
         }
       >
+        <Pressable onPress={handleFavourite} style={styles.bookmark}>
+          <Fontisto
+            name={!isFavourite ? "bookmark" : "bookmark-alt"}
+            size={24}
+            color={isFavourite ? colors.primary : "#888"}
+          />
+        </Pressable>
         {urlToImage && (
           <Image source={{ uri: urlToImage }} style={styles.image} />
         )}
         <View style={styles.textWrapper}>
-          <StyledText muted variant={"newsMeta"} numberOfLines={1}>
-            {formattedDate} - {source.name}
+          <StyledText variant={"newsMeta"} numberOfLines={1}>
+            {formattedDate}
           </StyledText>
-          <StyledText variant={"title"} style={styles.title}>
+          <StyledText
+            variant={"title"}
+            style={styles.title}
+            numberOfLines={urlToImage ? 3 : 5}
+          >
             {title}
           </StyledText>
+          <View style={{ flexDirection: "row" }}>
+            <StyledText variant={"badge"} numberOfLines={1}>
+              {source.name}
+            </StyledText>
+          </View>
         </View>
       </Pressable>
     </View>
@@ -62,6 +92,7 @@ const styles = StyleSheet.create({
     borderColor: "#ddd",
     flex: 1,
     flexDirection: "row",
+    position: "relative",
   },
   textWrapper: { overflow: "hidden", flex: 1 },
   image: {
@@ -73,4 +104,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#eee",
   },
   title: { marginVertical: 6 },
+  bookmark: {
+    position: "absolute",
+    right: 0,
+    top: -2,
+    paddingBottom: 16,
+    paddingHorizontal: 15,
+    zIndex: 10,
+  },
 });

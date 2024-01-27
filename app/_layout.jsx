@@ -4,6 +4,8 @@ import {
   useFonts,
   Nunito_400Regular,
   Nunito_500Medium,
+  Nunito_700Bold,
+  Nunito_600SemiBold,
 } from "@expo-google-fonts/nunito";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -24,6 +26,8 @@ export default function RootLayout() {
   const [loaded, error] = useFonts({
     Regular: Nunito_400Regular,
     Medium: Nunito_500Medium,
+    SemiBold: Nunito_600SemiBold,
+    Bold: Nunito_700Bold,
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
