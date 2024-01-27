@@ -54,18 +54,7 @@ export default function ViewNews() {
           uri: params.url,
         }}
       />
-      <View
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-          width: "100%",
-          zIndex: -1,
-        }}
-      >
+      <View style={styles.loading}>
         <LoadingAnimation />
       </View>
     </>
@@ -80,5 +69,15 @@ const styles = StyleSheet.create({
   bookmark: {
     paddingVertical: 8,
     paddingHorizontal: 16,
+  },
+  loading: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    zIndex: -1,
   },
 });

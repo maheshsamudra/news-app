@@ -43,7 +43,7 @@ const NewsBlock = ({ article, callback = () => null }) => {
   if (!title || !url || title === "[Removed]") return null;
 
   return (
-    <View style={{ marginVertical: 8, marginHorizontal: 20 }}>
+    <View style={styles.wrapper}>
       <Pressable
         style={styles.newsBlockWrapper}
         onPress={() =>
@@ -84,7 +84,7 @@ const NewsBlock = ({ article, callback = () => null }) => {
           >
             {title}
           </StyledText>
-          <View style={{ flexDirection: "row" }}>
+          <View style={styles.sourceName}>
             <StyledText variant={"badge"} numberOfLines={1}>
               {source.name}
             </StyledText>
@@ -98,6 +98,7 @@ const NewsBlock = ({ article, callback = () => null }) => {
 export default NewsBlock;
 
 const styles = StyleSheet.create({
+  wrapper: { marginVertical: 8, marginHorizontal: 20 },
   newsBlockWrapper: {
     backgroundColor: "white",
     padding: 10,
@@ -126,4 +127,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     zIndex: 10,
   },
+  sourceName: { flexDirection: "row" },
 });

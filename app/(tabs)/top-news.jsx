@@ -1,4 +1,4 @@
-import { ScrollView, RefreshControl, View } from "react-native";
+import { ScrollView, RefreshControl, View, StyleSheet } from "react-native";
 import useTopNews from "../../hooks/useTopNews";
 import NewsBlock from "../../components/news-block";
 import LoadingAnimation from "../../components/loading-animation";
@@ -32,10 +32,14 @@ export default function TopNews() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <View style={{ marginTop: 10 }} />
+      <View style={styles.margin} />
       {data?.map((article, idx) => (
         <NewsBlock article={article} key={idx} />
       ))}
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  margin: { marginTop: 10 },
+});

@@ -62,6 +62,7 @@ const styles = StyleSheet.create({
       borderRadius: 6,
     },
   },
+  center: { textAlign: "center" },
   badge: {
     borderRadius: 4,
     backgroundColor: colors.yellow,

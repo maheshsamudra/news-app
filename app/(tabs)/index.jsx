@@ -1,5 +1,5 @@
 import { useRouter } from "expo-router";
-import { RefreshControl, ScrollView, View } from "react-native";
+import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
 import useHomePage from "../../hooks/useHomePage";
 import StyledText from "../../components/styled-text";
 import fonts from "../../constants/fonts";
@@ -43,7 +43,7 @@ export default function Home() {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <View style={{ marginTop: 10 }} />
+      <View style={styles.margin} />
       {data?.map((article, idx) => (
         <NewsBlock article={article} key={idx} />
       ))}
@@ -54,32 +54,19 @@ export default function Home() {
 const NoCategories = () => {
   const router = useRouter();
   return (
-    <View style={{ padding: 20 }}>
-      <StyledText
-        style={{
-          textAlign: "center",
-          fontFamily: fonts.semiBold,
-          fontSize: 20,
-          marginVertical: 20,
-        }}
-      >
+    <View style={styles.noCategoriesWrapper}>
+      <StyledText style={styles.noCategoriesTitle}>
         {`Welcome to News Global`}
       </StyledText>
-      <StyledText style={{ textAlign: "center" }}>
+      <StyledText center>
         This is your home page where you find your favourite categories!
       </StyledText>
 
-      <StyledText style={{ textAlign: "center" }}>
+      <StyledText center>
         You can pick your favourite categories from "My Settings" page.
       </StyledText>
 
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          marginTop: 20,
-        }}
-      >
+      <View style={styles.button}>
         <StyledButton
           title={"Update My Categories"}
           onPress={() => router.push("/user-settings")}
@@ -88,3 +75,19 @@ const NoCategories = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  margin: { marginTop: 10 },
+  noCategoriesTitle: {
+    textAlign: "center",
+    fontFamily: fonts.semiBold,
+    fontSize: 20,
+    marginVertical: 20,
+  },
+  button: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+  noCategoriesWrapper: { padding: 20 },
+});

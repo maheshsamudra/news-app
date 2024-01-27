@@ -1,5 +1,5 @@
 import { useFocusEffect, useRouter } from "expo-router";
-import { ScrollView, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { useCallback, useState } from "react";
 import { getFavouriteNews } from "../../utils/saved-news";
 import NewsBlock from "../../components/news-block";
@@ -7,6 +7,7 @@ import StyledText from "../../components/styled-text";
 import fonts from "../../constants/fonts";
 import StyledButton from "../../components/styled-button";
 import LoadingAnimation from "../../components/loading-animation";
+import colors from "../../constants/colors";
 
 export default function SavedNews() {
   const [news, setNews] = useState([]);
@@ -46,28 +47,13 @@ export default function SavedNews() {
 const NoSavedNews = () => {
   const router = useRouter();
   return (
-    <View style={{ padding: 20 }}>
-      <StyledText
-        style={{
-          textAlign: "center",
-          fontFamily: fonts.semiBold,
-          fontSize: 20,
-          marginVertical: 20,
-        }}
-      >
+    <View style={styles.noSavedNewsWrapper}>
+      <StyledText style={styles.heading}>
         {`Congratulations,\nyou've caught up with all the news`}
       </StyledText>
-      <StyledText style={{ textAlign: "center" }}>
-        You do not have any saved news to read!
-      </StyledText>
+      <StyledText center>You do not have any saved news to read!</StyledText>
 
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "center",
-          marginTop: 20,
-        }}
-      >
+      <View style={styles.button}>
         <StyledButton
           title={"Read Top News"}
           onPress={() => router.push("/top-news")}
@@ -76,3 +62,18 @@ const NoSavedNews = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  noSavedNewsWrapper: { padding: 20 },
+  button: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 20,
+  },
+  heading: {
+    textAlign: "center",
+    fontFamily: fonts.semiBold,
+    fontSize: 20,
+    marginVertical: 20,
+  },
+});

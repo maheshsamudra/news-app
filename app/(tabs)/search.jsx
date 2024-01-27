@@ -1,4 +1,4 @@
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import SearchBox from "../../components/search-box";
 import useNewsSearch from "../../hooks/useNewsSearch";
 import LoadingAnimation from "../../components/loading-animation";
@@ -16,7 +16,7 @@ export default function Search() {
 
       {isLoading && <LoadingAnimation />}
 
-      <View style={{ marginTop: 10 }} />
+      <View style={styles.margin} />
       {!isLoading && (
         <>
           {data?.map((article, idx) => (
@@ -27,3 +27,7 @@ export default function Search() {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  margin: { marginTop: 10 },
+});
