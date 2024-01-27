@@ -1,12 +1,12 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const getCategories = async () => {
+export const getActiveCategory = async () => {
   const value = await AsyncStorage.getItem("categories");
-  return value ? JSON.parse(value) : [];
+  return value ? JSON.parse(value) : "";
 };
 
 export const checkIfCategoryExists = async (url, callback = () => null) => {
-  let existingFavourites = await getCategories();
+  let existingFavourites = await getActiveCategory();
 
   const alreadyExists = !!existingFavourites.find((a) => a.url === url);
 
@@ -16,15 +16,13 @@ export const checkIfCategoryExists = async (url, callback = () => null) => {
 };
 
 export const toggleCategories = async (category, callback = () => null) => {
-  let existing = await getCategories();
+  let existing = await getActiveCategory();
 
-  const alreadyExists = existing.find((cat) => cat === category);
-
-  if (alreadyExists) {
-    existing = existing.filter((cat) => cat !== category);
+  if (existing === category) {
+    existing = "";
     callback(false);
   } else {
-    existing.push(category);
+    existing = category;
     callback(true);
   }
 

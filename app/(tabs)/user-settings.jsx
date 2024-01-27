@@ -2,16 +2,16 @@ import { StyleSheet, Switch, View } from "react-native";
 import StyledText from "../../components/styled-text";
 import { useCallback, useEffect, useState } from "react";
 import colors from "../../constants/colors";
-import { getCategories, toggleCategories } from "../../utils/user-settings";
+import { getActiveCategory, toggleCategories } from "../../utils/user-settings";
 import { useFocusEffect } from "expo-router";
 
 export default function UserSettings() {
-  const [existingCategories, setExistingCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState("");
 
   const getSaved = async () => {
-    getCategories()
+    getActiveCategory()
       .then((res) => {
-        setExistingCategories(res);
+        setActiveCategory(res);
       })
       .finally(() => {});
   };
@@ -32,14 +32,14 @@ export default function UserSettings() {
           category={category}
           key={category.value}
           getSaved={getSaved}
-          existingCategories={existingCategories}
+          activeCategory={activeCategory}
         />
       ))}
     </View>
   );
 }
 
-const Category = ({ category, getSaved, existingCategories }) => {
+const Category = ({ category, getSaved, activeCategory = "" }) => {
   const { label, value } = category || {};
 
   const [isEnabled, setIsEnabled] = useState(false);
@@ -51,8 +51,8 @@ const Category = ({ category, getSaved, existingCategories }) => {
   };
 
   useEffect(() => {
-    setIsEnabled(() => !!existingCategories.find((c) => c === value));
-  }, [existingCategories?.length]);
+    setIsEnabled(activeCategory === value);
+  }, [activeCategory]);
 
   return (
     <View style={styles.category}>

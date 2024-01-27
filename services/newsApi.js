@@ -23,6 +23,7 @@ const createUrl = (endpoint, options) => {
     page = 1,
     pageSize = 50,
     language = "en",
+    category = "",
   } = options;
 
   let url = baseUrl + "/" + endpoint + "?";
@@ -33,6 +34,7 @@ const createUrl = (endpoint, options) => {
   if (page) url += `page=${page}&`;
   if (pageSize) url += `pageSize=${pageSize}&`;
   if (language) url += `language=${language}&`;
+  if (category) url += `category=${category}&`;
 
   url += `apiKey=${apiKey}`;
 
