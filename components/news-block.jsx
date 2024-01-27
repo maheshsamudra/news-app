@@ -7,7 +7,7 @@ import colors from "../constants/colors";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { checkIfSaved, toggleFavourite } from "../utils/saved-news";
 
-const NewsBlock = ({ article }) => {
+const NewsBlock = ({ article, callback = () => null }) => {
   const { title, url, urlToImage, source, publishedAt } = article;
 
   const router = useRouter();
@@ -22,6 +22,8 @@ const NewsBlock = ({ article }) => {
     e.stopPropagation();
 
     await toggleFavourite(article, setIsFavourite);
+
+    callback();
   };
 
   const formattedDate = new Intl.DateTimeFormat("en", {

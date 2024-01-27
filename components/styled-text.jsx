@@ -8,6 +8,7 @@ const StyledText = ({
   variant = "normal",
   muted = false,
   style = {},
+  center = false,
   ellipsis = false,
   ...props
 }) => {
@@ -18,6 +19,7 @@ const StyledText = ({
           { opacity: muted ? 0.5 : 1 },
           styles?.variants?.[variant],
           ellipsis ? styles.ellipsis : {},
+          center ? styles.center : {},
           style,
         ]}
         {...props}
@@ -69,6 +71,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 6,
       borderRadius: 6,
     },
+    center: { textAlign: "center" },
     ellipsis: {
       overflow: "hidden",
       width: "100%",

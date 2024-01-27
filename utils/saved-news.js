@@ -1,5 +1,10 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+export const getFavouriteNews = async () => {
+  const value = await AsyncStorage.getItem("saved");
+  return value ? JSON.parse(value) : [];
+};
+
 export const checkIfSaved = async (url, callback = () => null) => {
   const value = await AsyncStorage.getItem("saved");
   let existingFavourites = value ? JSON.parse(value) : [];
@@ -13,8 +18,7 @@ export const checkIfSaved = async (url, callback = () => null) => {
 
 export const toggleFavourite = async (article, callback = () => null) => {
   if (!article.url) return;
-  const value = await AsyncStorage.getItem("saved");
-  let existingFavourites = value ? JSON.parse(value) : [];
+  let existingFavourites = await getFavouriteNews();
 
   const alreadyExists = existingFavourites.find((a) => a.url === article.url);
 

@@ -4,9 +4,10 @@ import StyledText from "./styled-text";
 import colors from "../constants/colors";
 import fonts from "../constants/fonts";
 
-const StyledButton = ({ title = "Submit" }) => {
+const StyledButton = ({ title = "Submit", onPress = () => null }) => {
   return (
     <Pressable
+      onPress={onPress}
       style={{
         backgroundColor: colors.primary,
         paddingHorizontal: 10,
