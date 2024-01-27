@@ -1,7 +1,9 @@
 const colors = {
   primary: "#4893ff",
   primaryFaded: "#99daff",
-  text: "black",
+  purple: "#453d81",
+  yellow: "#ffea97",
+  text: "#000000",
 };
 
 export default colors;

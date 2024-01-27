@@ -78,7 +78,6 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
   },
   bookmark: {
-    backgroundColor: "orange",
     paddingVertical: 8,
     paddingHorizontal: 16,
   },

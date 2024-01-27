@@ -32,17 +32,7 @@ const StyledText = ({
 
 const Wrapper = ({ variant, children }) => {
   if (variant === "badge") {
-    return (
-      <View
-        style={{
-          borderRadius: 4,
-          backgroundColor: "#ffea97",
-          overflow: "hidden",
-        }}
-      >
-        {children}
-      </View>
-    );
+    return <View style={styles.badge}>{children}</View>;
   }
   return children;
 };
@@ -66,16 +56,15 @@ const styles = StyleSheet.create({
     badge: {
       fontSize: 12,
       fontFamily: fonts.bold,
-      color: "#453d81",
+      color: colors.purple,
       paddingVertical: 2,
       paddingHorizontal: 6,
       borderRadius: 6,
     },
-    center: { textAlign: "center" },
-    ellipsis: {
-      overflow: "hidden",
-      width: "100%",
-      backgroundColor: "pink",
-    },
+  },
+  badge: {
+    borderRadius: 4,
+    backgroundColor: colors.yellow,
+    overflow: "hidden",
   },
 });
