@@ -10,8 +10,6 @@ export default function Search() {
 
   const { data, isLoading } = useNewsSearch(searchString);
 
-  console.log(searchString);
-
   return (
     <ScrollView>
       <SearchBox search={setSearchString} />

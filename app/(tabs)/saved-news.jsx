@@ -1,13 +1,11 @@
-import { Link, router, useFocusEffect, useRouter } from "expo-router";
-import { Button, ScrollView, Text, View } from "react-native";
-import useHomePage from "../../hooks/useHomePage";
-import { useCallback, useEffect, useState } from "react";
+import { useFocusEffect, useRouter } from "expo-router";
+import { ScrollView, View } from "react-native";
+import { useCallback, useState } from "react";
 import { getFavouriteNews } from "../../utils/saved-news";
 import NewsBlock from "../../components/news-block";
 import StyledText from "../../components/styled-text";
 import fonts from "../../constants/fonts";
 import StyledButton from "../../components/styled-button";
-import newsApi from "../../services/newsApi";
 import LoadingAnimation from "../../components/loading-animation";
 
 export default function SavedNews() {
