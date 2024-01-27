@@ -8,16 +8,22 @@ import StyledText from "../../components/styled-text";
 import fonts from "../../constants/fonts";
 import StyledButton from "../../components/styled-button";
 import newsApi from "../../services/newsApi";
+import LoadingAnimation from "../../components/loading-animation";
 
 export default function SavedNews() {
   const [news, setNews] = useState([]);
-
-  const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const getSaved = async () => {
-    getFavouriteNews().then((res) => {
-      setNews(res);
-    });
+    setLoading(true);
+    setNews([]);
+    getFavouriteNews()
+      .then((res) => {
+        setNews(res);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useFocusEffect(
@@ -28,16 +34,19 @@ export default function SavedNews() {
 
   return (
     <ScrollView>
-      {news?.map((article, idx) => (
-        <NewsBlock article={article} key={idx} callback={getSaved} />
-      ))}
+      {loading && <LoadingAnimation />}
+      {!loading &&
+        news?.map((article, idx) => (
+          <NewsBlock article={article} key={idx} callback={getSaved} />
+        ))}
 
-      {news?.length === 0 && <NoSavedNews />}
+      {!loading && news?.length === 0 && <NoSavedNews />}
     </ScrollView>
   );
 }
 
 const NoSavedNews = () => {
+  const router = useRouter();
   return (
     <View style={{ padding: 20 }}>
       <StyledText

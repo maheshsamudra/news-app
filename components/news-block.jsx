@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Image, Pressable, StyleSheet, View } from "react-native";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import StyledText from "./styled-text";
 import { Fontisto } from "@expo/vector-icons";
 import colors from "../constants/colors";
@@ -13,6 +13,12 @@ const NewsBlock = ({ article, callback = () => null }) => {
   const router = useRouter();
 
   const [isFavourite, setIsFavourite] = useState(false);
+
+  useFocusEffect(
+    useCallback(() => {
+      checkIfSaved(url, setIsFavourite).then(() => null);
+    }, []),
+  );
 
   useEffect(() => {
     checkIfSaved(url, setIsFavourite).then(() => null);
