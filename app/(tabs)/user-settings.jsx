@@ -25,7 +25,8 @@ export default function UserSettings() {
   return (
     <View>
       <StyledText variant={"title"} style={{ margin: 20 }}>
-        Your home page will show the categories selected here.
+        You can pick your favourite category here and the home page will show
+        the top news from the same category.
       </StyledText>
       {categories.map((category) => (
         <Category

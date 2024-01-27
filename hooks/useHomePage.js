@@ -3,16 +3,15 @@ import { useFocusEffect } from "expo-router";
 import newsApi from "../services/newsApi";
 import { getActiveCategory } from "../utils/user-settings";
 
-const useHomePage = (searchQuery = "") => {
+const useHomePage = (refresh = "") => {
   const [isLoading, setIsLoading] = useState(true);
   const [inactive, setInactive] = useState(false);
   const [data, setData] = useState([]);
 
   useFocusEffect(
     useCallback(() => {
-      if (data?.length) return;
-
       setIsLoading(true);
+      setData([]);
       getActiveCategory().then((res) => {
         const category = res;
 
@@ -37,10 +36,7 @@ const useHomePage = (searchQuery = "") => {
 
         // fetch categories
       });
-
-      if (!searchQuery) return;
-      setIsLoading(true);
-    }, [searchQuery]),
+    }, [refresh]),
   );
 
   return { data, isLoading, inactive };
