@@ -1,15 +1,31 @@
-import { Link, useRouter } from "expo-router";
-import { ScrollView, Text } from "react-native";
-import useTopNews from "../../hooks/useTopNews";
-import StyledText from "../../components/styled-text";
+import { ScrollView, Text, View } from "react-native";
 import SearchBox from "../../components/search-box";
+import useNewsSearch from "../../hooks/useNewsSearch";
+import LoadingAnimation from "../../components/loading-animation";
+import NewsBlock from "../../components/news-block";
+import { useState } from "react";
 
 export default function Search() {
-  const { data } = useTopNews();
+  const [searchString, setSearchString] = useState("");
+
+  const { data, isLoading } = useNewsSearch(searchString);
+
+  console.log(searchString);
 
   return (
     <ScrollView>
-      <SearchBox />
+      <SearchBox search={setSearchString} />
+
+      {isLoading && <LoadingAnimation />}
+
+      <View style={{ marginTop: 10 }} />
+      {!isLoading && (
+        <>
+          {data?.map((article, idx) => (
+            <NewsBlock article={article} key={idx} />
+          ))}
+        </>
+      )}
     </ScrollView>
   );
 }

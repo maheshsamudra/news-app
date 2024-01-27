@@ -3,8 +3,13 @@ import { TextInput, View } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import StyledButton from "./styled-button";
 
-const SearchBox = () => {
+const SearchBox = ({ search }) => {
   const [searchValue, setSearchValue] = useState("");
+
+  const handleSearch = () => {
+    search("");
+    setTimeout(() => search(searchValue), 5);
+  };
   return (
     <View style={{ margin: 20 }}>
       <View
@@ -29,14 +34,17 @@ const SearchBox = () => {
         <TextInput
           value={searchValue}
           onChangeText={(text) => setSearchValue(text)}
+          enterKeyHint={"search"}
+          returnKeyType={"search"}
           style={{
             paddingVertical: 8,
             paddingHorizontal: 10,
             backgroundColor: "white",
             flex: 1,
           }}
+          onSubmitEditing={handleSearch}
         />
-        <StyledButton title={"Search"} />
+        <StyledButton title={"Search"} onPress={handleSearch} />
       </View>
     </View>
   );

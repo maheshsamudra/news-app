@@ -2,8 +2,8 @@ import { useState, useCallback } from "react";
 import { useFocusEffect } from "expo-router";
 import newsApi from "../services/newsApi";
 
-const useHomePage = (searchQuery = "test") => {
-  const [isLoading, setIsLoading] = useState(true);
+const useNewsSearch = (searchQuery = "") => {
+  const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
 
   useFocusEffect(
@@ -27,4 +27,4 @@ const useHomePage = (searchQuery = "test") => {
   return { data, isLoading };
 };
 
-export default useHomePage;
+export default useNewsSearch;

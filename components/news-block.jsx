@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   bookmark: {
     position: "absolute",
     right: 0,
-    top: -2,
+    top: -3,
     paddingBottom: 16,
     paddingHorizontal: 15,
     zIndex: 10,
