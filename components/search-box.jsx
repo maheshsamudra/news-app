@@ -27,6 +27,7 @@ const SearchBox = ({ search }) => {
           returnKeyType={"search"}
           style={styles.text}
           onSubmitEditing={handleSearch}
+          placeholder={"Type here to search"}
         />
         <StyledButton title={"Search"} onPress={handleSearch} />
       </View>
