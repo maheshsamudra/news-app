@@ -6,8 +6,7 @@ export const getCategories = async () => {
 };
 
 export const checkIfCategoryExists = async (url, callback = () => null) => {
-  const value = await AsyncStorage.getItem("categories");
-  let existingFavourites = value ? JSON.parse(value) : [];
+  let existingFavourites = await getCategories();
 
   const alreadyExists = !!existingFavourites.find((a) => a.url === url);
 
@@ -22,7 +21,7 @@ export const toggleCategories = async (category, callback = () => null) => {
   const alreadyExists = existing.find((cat) => cat === category);
 
   if (alreadyExists) {
-    existing = existing.filter((cat) => cat === category);
+    existing = existing.filter((cat) => cat !== category);
     callback(false);
   } else {
     existing.push(category);

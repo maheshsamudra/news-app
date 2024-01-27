@@ -5,7 +5,9 @@ import useHomePage from "../../hooks/useHomePage";
 export default function Home() {
   const router = useRouter();
 
-  const { data } = useHomePage();
+  const { data, isLoading, inactive } = useHomePage();
+
+  console.log(inactive);
 
   return (
     <ScrollView>

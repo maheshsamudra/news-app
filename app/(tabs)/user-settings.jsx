@@ -1,6 +1,6 @@
 import { StyleSheet, Switch, View } from "react-native";
 import StyledText from "../../components/styled-text";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import colors from "../../constants/colors";
 import { getCategories, toggleCategories } from "../../utils/user-settings";
 import { useFocusEffect } from "expo-router";
@@ -9,10 +9,8 @@ export default function UserSettings() {
   const [existingCategories, setExistingCategories] = useState([]);
 
   const getSaved = async () => {
-    setExistingCategories([]);
     getCategories()
       .then((res) => {
-        console.log(res);
         setExistingCategories(res);
       })
       .finally(() => {});
@@ -34,13 +32,14 @@ export default function UserSettings() {
           category={category}
           key={category.value}
           getSaved={getSaved}
+          existingCategories={existingCategories}
         />
       ))}
     </View>
   );
 }
 
-const Category = ({ category, getSaved }) => {
+const Category = ({ category, getSaved, existingCategories }) => {
   const { label, value } = category || {};
 
   const [isEnabled, setIsEnabled] = useState(false);
@@ -50,6 +49,10 @@ const Category = ({ category, getSaved }) => {
     await getSaved();
     setIsEnabled((previousState) => !previousState);
   };
+
+  useEffect(() => {
+    setIsEnabled(() => !!existingCategories.find((c) => c === value));
+  }, [existingCategories?.length]);
 
   return (
     <View style={styles.category}>
