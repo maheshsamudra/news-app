@@ -1,7 +1,7 @@
 const fonts = {
   toolBarFontSize: 12,
-  normal: "Inter_400Regular",
-  medium: "Inter_500Medium",
+  normal: "Regular",
+  medium: "Medium",
 };
 
 export default fonts;

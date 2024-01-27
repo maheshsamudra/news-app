@@ -2,9 +2,9 @@ import { SplashScreen, Stack } from "expo-router";
 import { useEffect } from "react";
 import {
   useFonts,
-  Inter_400Regular,
-  Inter_500Medium,
-} from "@expo-google-fonts/inter";
+  Nunito_400Regular,
+  Nunito_500Medium,
+} from "@expo-google-fonts/nunito";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export {
@@ -22,8 +22,8 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    Inter_400Regular,
-    Inter_500Medium,
+    Regular: Nunito_400Regular,
+    Medium: Nunito_500Medium,
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.

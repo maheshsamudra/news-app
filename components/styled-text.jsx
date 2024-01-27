@@ -7,10 +7,18 @@ const StyledText = ({
   variant = "normal",
   muted = false,
   style = {},
+  ellipsis = false,
+  ...props
 }) => {
   return (
     <Text
-      style={[{ opacity: muted ? 0.5 : 1 }, styles?.variants?.[variant], style]}
+      style={[
+        { opacity: muted ? 0.5 : 1 },
+        styles?.variants?.[variant],
+        ellipsis ? styles.ellipsis : {},
+        style,
+      ]}
+      {...props}
     >
       {children}
     </Text>
@@ -28,6 +36,15 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 16,
       fontFamily: fonts.medium,
+    },
+    newsMeta: {
+      fontSize: 12,
+      fontFamily: fonts.medium,
+    },
+    ellipsis: {
+      overflow: "hidden",
+      width: "100%",
+      backgroundColor: "pink",
     },
   },
 });
