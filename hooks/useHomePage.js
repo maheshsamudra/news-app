@@ -1,5 +1,4 @@
-import { useState, useCallback } from "react";
-import { useFocusEffect } from "expo-router";
+import { useState, useEffect } from "react";
 import newsApi from "../services/newsApi";
 import { getActiveCategory } from "../utils/user-settings";
 
@@ -8,35 +7,33 @@ const useHomePage = (refresh = "") => {
   const [inactive, setInactive] = useState(false);
   const [data, setData] = useState([]);
 
-  useFocusEffect(
-    useCallback(() => {
-      setIsLoading(true);
-      getActiveCategory().then((res) => {
-        const category = res;
+  useEffect(() => {
+    setIsLoading(true);
+    getActiveCategory().then((res) => {
+      const category = res;
 
-        if (res?.length === 0) {
-          setInactive(true);
-          return;
-        }
-        setInactive(false);
+      if (res?.length === 0) {
+        setInactive(true);
+        return;
+      }
+      setInactive(false);
 
-        // fetch sources
+      // fetch sources
 
-        newsApi("top-headlines", { category })
-          .then((r) => {
-            setData(r.articles);
-          })
-          .catch((e) => {
-            console.log(e);
-          })
-          .finally(() => {
-            setIsLoading(false);
-          });
+      newsApi("top-headlines", { category })
+        .then((r) => {
+          setData(r.articles);
+        })
+        .catch((e) => {
+          console.log(e);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
 
-        // fetch categories
-      });
-    }, [refresh]),
-  );
+      // fetch categories
+    });
+  }, [refresh]);
 
   return { data, isLoading, inactive };
 };
