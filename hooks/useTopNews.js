@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import newsApi from "../services/newsApi";
 
-const useHomePage = (refresh) => {
+const useTopNews = (refresh) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
 
@@ -23,4 +23,4 @@ const useHomePage = (refresh) => {
   return { data, isLoading };
 };
 
-export default useHomePage;
+export default useTopNews;
