@@ -15,7 +15,11 @@ const StyledButton = ({ title = "Submit", onPress = () => null }) => {
 export default StyledButton;
 
 const styles = StyleSheet.create({
-  text: { color: "white", fontFamily: fonts.medium, fontSize: 16 },
+  text: {
+    color: "white",
+    fontFamily: fonts.medium,
+    fontSize: 16,
+  },
   button: {
     backgroundColor: colors.primary,
     paddingHorizontal: 10,
